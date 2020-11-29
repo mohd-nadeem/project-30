@@ -11,7 +11,7 @@ class Box {
     World.add(world, this.body);
   }
   display() {
-    if (this.body.speed < 3) {
+    if (this.body.speed < 4) {
       var pos = this.body.position;
 
       rectMode(CENTER);
@@ -26,4 +26,11 @@ class Box {
       pop();
     }
   }
+  score() {
+    if (this.visibility < 0 && this.visibility > -105) {
+      score++;
+    }
+  }
 };
+
+

@@ -7,9 +7,13 @@ const Constraint = Matter.Constraint;
 var ground1, ground2, ground;
 var block1, block2, block3, block4, block5, block6, block7, block8, block9, block10, block11, block12, block13, block14, block15, block16, block17, block18;
 var polygon, slingShot, polygonImg;
+var bg = "bg.png";
+var backgroundImg
+var score = 0;
 
 function preload() {
   polygonImg = loadImage("hexagon.png");
+  getBackground();
 }
 
 function setup() {
@@ -52,33 +56,74 @@ function setup() {
 }
 
 function draw() {
-  background("black");
+  if (backgroundImg)
+    background(backgroundImg);
 
   imageMode(CENTER);
   image(polygonImg, polygon.position.x, polygon.position.y, 40, 40);
+
+
+  textSize(35);
+  fill("white");
+  text("Score :" + score, 750, 40);
 
   ground.display();
   ground1.display();
   ground2.display();
 
   block1.display();
+  block1.score();
+
   block2.display();
+  block2.score();
+
   block3.display();
+  block3.score();
+
   block4.display();
+  block4.score();
+
   block5.display();
+  block5.score();
+
   block6.display();
+  block6.score();
+
   block7.display();
+  block7.score();
+
   block8.display();
+  block8.score();
+
   block9.display();
+  block9.score();
+
   block10.display();
+  block10.score();
+
   block11.display();
+  block11.score();
+
   block12.display();
+  block12.score();
+
   block13.display();
+  block13.score();
+
   block14.display();
+  block14.score();
+
   block15.display();
+  block15.score();
+
   block16.display();
+  block16.score();
+
   block17.display();
+  block17.score();
+
   block18.display();
+  block18.score();
 
   slingShot.display();
 }
@@ -96,4 +141,23 @@ function keyPressed() {
   if (keyCode === 32) {
     slingShot.attach(polygon)
   }
+}
+
+async function getBackground() {
+  var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
+  var rJSON = await response.json();
+
+  var dt = rJSON.datetime;
+  var hour = dt.slice(11, 13);
+
+  if (hour >= 06 && hour <= 18) {
+    bg = "bg2.jpg";
+  }
+  else {
+
+    bg = "bg.png";
+
+
+  }
+  backgroundImg = loadImage(bg);
 }
